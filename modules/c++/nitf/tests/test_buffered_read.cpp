@@ -70,7 +70,7 @@ void doRead(const std::string& inFile,
         if (!image.empty())
         {
             std::vector<std::byte*> imagePtrs;
-            std::byte*imagePtr(image.data());
+            auto imagePtr(image.data());
             for (size_t ii = 0;
                     ii < subWindow.getNumBands();
                     ++ii, imagePtr += numBytesPerBand)

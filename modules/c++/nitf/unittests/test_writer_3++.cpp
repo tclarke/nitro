@@ -103,7 +103,7 @@ static void doWrite(const nitf::Record& record_, nitf::Reader& reader, const std
     for (int i = 0; i < num; i++)
     {
         nitf::SegmentReaderSource readerSource(reader.newDEReader(i));
-        std::shared_ptr< ::nitf::WriteHandler> segmentWriter(
+        mem::SharedPtr< ::nitf::WriteHandler> segmentWriter(
             new nitf::SegmentWriter(readerSource));
         writer.setDEWriteHandler(i, segmentWriter);
     }
@@ -147,7 +147,7 @@ static void manuallyWriteImageBands(nitf::ImageSegment & segment,
     TEST_ASSERT_EQ("NC", subheader.imageCompression());
     TEST_ASSERT_EQ("    ", subheader.getCompressionRate().toString());
 
-    nitf::BufferList buffer(nBands);
+    nitf::BufferList<std::byte> buffer(nBands);
     std::vector<uint32_t> bandList(nBands);
 
     for (uint32_t band = 0; band < nBands; band++)
